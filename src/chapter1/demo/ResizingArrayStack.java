@@ -1,11 +1,13 @@
 package chapter1.demo;
 
-public class FixedCapacityStack<Item> {
+import java.util.Iterator;
+
+public class ResizingArrayStack<Item> implements Iterable<Item> {
     private Item[] a;
     private int N;
 
     @SuppressWarnings("unchecked")
-    public FixedCapacityStack(int cap) {
+    public ResizingArrayStack(int cap) {
         a = (Item[]) new Object[cap];
     }
 
@@ -23,8 +25,10 @@ public class FixedCapacityStack<Item> {
     }
 
     public Item pop() {
+        Item item = a[--N];
+        a[N] = null;
         if (N > 0 && N == a.length / 4) resize(a.length / 2);
-        return a[--N];
+        return item;
     }
 
     @SuppressWarnings("unchecked")
@@ -32,5 +36,24 @@ public class FixedCapacityStack<Item> {
         Item[] tmp = (Item[]) new Object[max];
         System.arraycopy(a, 0, tmp, 0, N);
         a = tmp;
+    }
+
+    @Override
+    public Iterator<Item> iterator() {
+        return new ReverseArrayIterator();
+    }
+
+    private class ReverseArrayIterator implements Iterator<Item> {
+        private int i = N;
+
+        @Override
+        public boolean hasNext() {
+            return i > 0;
+        }
+
+        @Override
+        public Item next() {
+            return a[--i];
+        }
     }
 }
