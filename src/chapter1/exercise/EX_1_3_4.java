@@ -8,7 +8,7 @@ import edu.princeton.cs.algs4.StdIn;
  * and uses a stack to determine whether its parentheses are properly balanced. For example,
  * your program should print true for [()]{}{[()()]()} and false for [(]).
  */
-public class EX1_3_4 {
+public class EX_1_3_4 {
     public static void main(String[] args) {
         Stack<Character> stack = new Stack<>();
         boolean notMatched = false;
