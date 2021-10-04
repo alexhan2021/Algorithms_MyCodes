@@ -38,8 +38,10 @@ public class Stack<Item> implements Iterable<Item> {
         Item item;
         Node next;
     }
-    private class ListIterator implements Iterator<Item>{
+
+    private class ListIterator implements Iterator<Item> {
         private Node current = first;
+
         @Override
         public boolean hasNext() {
             return current != null;
