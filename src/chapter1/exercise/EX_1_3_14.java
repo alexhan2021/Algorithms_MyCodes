@@ -15,6 +15,12 @@ public class EX_1_3_14 {
         queue.enqueue("4");
         queue.enqueue("5");
         queue.enqueue("6");
+
+        queue.dequeue();
+        queue.dequeue();
+        queue.dequeue();
+        queue.dequeue();
+        queue.dequeue();
     }
 
     private static class ResizingArrayQueueOfStrings {
@@ -38,7 +44,7 @@ public class EX_1_3_14 {
         }
 
         public void enqueue(String str) {
-            if (isFull()) resize(capacity*2);
+            if (isFull()) resize(capacity * 2);
             data[(tail++) % capacity] = str;
             N++;
         }
@@ -47,6 +53,7 @@ public class EX_1_3_14 {
             if (isEmpty()) return null;
             String str = data[(head++) % capacity];
             N--;
+            if (N == capacity / 4) resize(capacity / 2);
             return str;
         }
 
@@ -54,14 +61,16 @@ public class EX_1_3_14 {
             return (tail + 1) % capacity == head;
         }
 
-        private void resize(int newCapacity){
+        private void resize(int newCapacity) {
             String[] temp = new String[newCapacity];
             int tempHead = head;
             for (int i = 0; i < N; i++) {
-                temp[i] = data[(head++)%capacity];
+                temp[i] = data[(head++) % capacity];
             }
             data = temp;
             capacity = newCapacity;
+            head = 0;
+            tail = N;
         }
 
     }
