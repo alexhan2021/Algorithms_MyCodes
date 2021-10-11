@@ -1,7 +1,5 @@
 package chapter1.exercise;
 
-import chapter1.demo.Stack;
-
 import java.util.Iterator;
 
 /**
@@ -20,7 +18,7 @@ public class EX_1_3_7 {
         System.out.println(stack.pop());
     }
 
-    private static class Stack<Item> implements Iterable<Item>{
+    private static class Stack<Item> implements Iterable<Item> {
         private Node first;
         private int N;
 
@@ -47,8 +45,8 @@ public class EX_1_3_7 {
             return item;
         }
 
-        public Item peek(){
-            if(first != null)
+        public Item peek() {
+            if (first != null)
                 return first.item;
             return null;
         }

@@ -11,7 +11,7 @@ import edu.princeton.cs.algs4.StdIn;
 public class EX_1_3_4 {
     public static void main(String[] args) {
         Stack<Character> stack = new Stack<>();
-        boolean notMatched = false;
+        boolean matched = true;
         while (!StdIn.isEmpty()) {
             char userInput = StdIn.readChar();
             if (userInput == '{' || userInput == '[' || userInput == '(') {
@@ -20,15 +20,15 @@ public class EX_1_3_4 {
                 try {
                     char inStack = stack.pop();
                     if ((userInput == '}' && inStack != '{') || (userInput == ']' && inStack != '[') || (userInput == ')' && inStack != '('))
-                        notMatched = true;
+                        matched = false;
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
-                    notMatched = true;
+                    matched = false;
                     break;
                 }
 
             }
         }
-        System.out.println(!notMatched);
+        System.out.println(matched);
     }
 }
